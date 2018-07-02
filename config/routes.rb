@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+
   get '/app' => 'pages#app'
+  get "/login" => "session#new"
+  post '/login' => 'session#create'
   # get 'users/new'
   # get 'users/create'
   get 'users/index' => "users#index"

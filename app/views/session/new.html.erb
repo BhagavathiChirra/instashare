@@ -1,0 +1,18 @@
+<div class="content_box">
+  <div id="login_div">
+    <h2>Log In</h2>
+    <%= form_tag login_path, :id => 'login_form' do %>
+      <strong> <%= flash[:error] %></strong>
+      <br>
+      <%= label_tag :email %>
+      <%= email_field_tag :email, nil%>
+      <br>
+      <br>
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil%>
+      <br><br>
+
+      <%= submit_tag 'Login', class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
