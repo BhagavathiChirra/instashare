@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
+
+
+  get '/current_user' => 'users#current_user'
+
   get '/app' => 'pages#app'
   get "/login" => "session#new"
   post '/login' => 'session#create'
-  # get 'users/new'
-  # get 'users/create'
+  delete "/login" => "session#destroy"
+
+  get "/comments/:id" => "comments#index"
+
   get 'users/index' => "users#index"
   # get 'users/show'
   # get 'users/edit'
@@ -12,6 +18,9 @@ Rails.application.routes.draw do
   # get 'users/destroy'
   post "/users" => "users#create"
 
+  post "posts" => "posts#create"
+
   resources :users
+  resources :posts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

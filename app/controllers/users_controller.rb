@@ -1,16 +1,26 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def new
+    @user = User.new
+  end
+
+  def current_user
+    # binding.pry
+    puts "USER: ", @current_user
+
+    render json: {user: nil} and return unless @current_user
+    render json: @current_user, only: [:email, :id, :name], include: {posts: {include: [:comments]}}
   end
 
   def create
-    puts "PARAMS ----------------------------------"
-    p params
-    user = User.create name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], image: params[:image]
-    # render json: user, status: :ok
-    # if successful:
-      # redirect_to app_path
+    user = User.create user_params
+    if user.persisted?
+      session[:user_id] = user.id
+      redirect_to app_path
+    else
+      flash[:errors] = user.errors.full_messages
+      redirect_to new_user_path
+    end
   end
 
   def index
@@ -29,8 +39,8 @@ class UsersController < ApplicationController
   def destroy
   end
 
-  # private
-  # def user_params
-  #   params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
-  # end
+  private
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
+  end
 end

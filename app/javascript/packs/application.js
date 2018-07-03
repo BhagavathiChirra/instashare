@@ -11,14 +11,24 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+// import {HashRouter as Router, Route} from 'react-router-dom';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+import "../src/application.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './components/App';
+
+// import Home from '../components/Home'
+
+// const Routes = (
+//   <Router>
+//     <div>
+//       {/* <Route exact path="/" component={ Home } /> */}
+//       <Route exact path="/" component={ Home } />
+//     </div>
+//   </Router>
+// );
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Hello name="React" />,
-    document.body.appendChild(document.createElement('div')),
-  )
+  const container = document.body.appendChild(document.createElement('div'));
+  ReactDOM.render(<App/>, container);
 })

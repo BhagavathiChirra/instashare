@@ -13,9 +13,9 @@ User.destroy_all
 # Follow.destroy_all
 
 
-u1 = User.create name: "Anna", email: "anna@ga.com", password: "chicken", password_confirmation: "chicken", image: 'https://orig00.deviantart.net/c134/f/2013/153/2/4/pooh_bear_by_kunal908-d67le2z.png'
-u2 = User.create name: "Bagi", email: "bagi@ga.com", password: "chicken", password_confirmation: "chicken", image: 'https://static.giantbomb.com/uploads/scale_small/0/495/355011-piglet_disney_1.jpg'
-u3 = User.create name: "Linna", email: "linna@ga.com", password: "chicken", password_confirmation: "chicken", image: 'https://i.pinimg.com/originals/27/7e/4e/277e4e7c6c1c0d2d927d68289e6eb8d7.jpg'
+u1 = User.create name: "Anna", email: "anna@ga.com", password: "chicken", image: 'https://orig00.deviantart.net/c134/f/2013/153/2/4/pooh_bear_by_kunal908-d67le2z.png'
+u2 = User.create name: "Bagi", email: "bagi@ga.com", password: "chicken", image: 'https://static.giantbomb.com/uploads/scale_small/0/495/355011-piglet_disney_1.jpg'
+u3 = User.create name: "Linna", email: "linna@ga.com", password: "chicken", image: 'https://i.pinimg.com/originals/27/7e/4e/277e4e7c6c1c0d2d927d68289e6eb8d7.jpg'
 
 puts "Created #{ User.all.length } users"
 
