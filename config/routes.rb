@@ -10,15 +10,17 @@ Rails.application.routes.draw do
   delete "/login" => "session#destroy"
 
   get "/comments/:id" => "comments#index"
+  post "/comments" => "comments#create"
+  delete "/comments" => "comments#destroy"
 
-  get 'users/index' => "users#index"
+  # get 'users/index' => "users#index"
   # get 'users/show'
   # get 'users/edit'
   # get 'users/update'
   # get 'users/destroy'
-  post "/users" => "users#create"
+  # post "/users" => "users#create"
 
-  post "posts" => "posts#create"
+  # post "posts" => "posts#create"
 
   resources :users
   resources :posts

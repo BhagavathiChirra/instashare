@@ -1,23 +1,16 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import {HashRouter as Router, Route, Link} from 'react-router-dom';
+import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 import Home from './Home';
 import AddPost from './AddPost';
+import ShowPost from './ShowPost';
+import Profile from './Profile';
+import Users from './Users';
 
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+
+import { Navbar } from 'reactstrap';
 
 class App extends Component{
 
@@ -28,6 +21,8 @@ class App extends Component{
       user: null
     }
 
+
+    this.postAdded = this.postAdded.bind( this );
   }
 
   componentWillMount(){
@@ -38,6 +33,13 @@ class App extends Component{
     });
   }
 
+  postAdded( post ){
+    // console.log('POST ADDED (in App.js): ', post);
+    const userCopy = Object.assign({}, this.state.user);
+    userCopy.posts.push( post );
+    this.setState({ user: userCopy });
+  }
+
   render(){
     const posts = this.state.user ? this.state.user.posts : [];
     const routes = (
@@ -45,13 +47,20 @@ class App extends Component{
         <div>
         <div>
           <Navbar color="light" light expand="md">
-            <Link to="/">Home</Link> &nbsp;|&nbsp;
-            <Link to="/posts/new">New Post</Link>
+            <Link to="/">Home</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to="/posts/new">New Post</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to="/users">Users</Link>
           </Navbar>
         </div>
           {/* <Route exact path="/" component={ Home } /> */}
           <Route exact path="/" render={ (props) => <Home {...props} posts={posts} /> }/>
-          <Route exact path="/posts/new" component={AddPost} />
+          <Switch>
+            <Route exact path="/posts/new" render={ (props) => <AddPost {...props} addedPost={this.postAdded} /> }/>
+            <Route exact path="/posts/:id" component={ShowPost} />
+          </Switch>
+          <Route exact path="/users" component={Users} />
+          <Route exact path="/users/:username" component={Profile} />
+          {/*<Route exact path="/posts/:id/edit" component={EditPost} />*/}
         </div>
       </Router>
     );

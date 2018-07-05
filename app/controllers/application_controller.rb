@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :fetch_user
   skip_before_action :verify_authenticity_token
-  
 
   def check_if_logged_in
     unless @current_user.present?

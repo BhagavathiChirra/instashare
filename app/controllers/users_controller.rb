@@ -9,11 +9,31 @@ class UsersController < ApplicationController
     puts "USER: ", @current_user
 
     render json: {user: nil} and return unless @current_user
-    render json: @current_user, only: [:email, :id, :name], include: {posts: {include: [:comments]}}
+    render json: @current_user, only: [:email, :id, :name], include: {
+      posts: {
+        include: {
+          user: {
+            only: [:name, :created_at, :image]
+          },
+          comments: {
+            include: {
+              user: {
+                only: [:name, :created_at, :image]
+              }
+            }
+          }
+        }
+      }
+    }
   end
 
   def create
-    user = User.create user_params
+    user = User.new user_params
+    if params[:image].present?
+      req = Cloudinary::Uploader.upload(params[:image])
+      user.image = req["public_id"]
+    end
+    user.save
     if user.persisted?
       session[:user_id] = user.id
       redirect_to app_path
@@ -25,6 +45,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    render json: @users, only: [:name, :image]
   end
 
   def show

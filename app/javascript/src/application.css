@@ -1,12 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand');
+
 #post_image{
   height: 200px;
   width: 200px;
+}
+#post_home_image{
+  cursor: pointer;
 }
 #post_col{
   /* display: block; */
   /* vertical-align: middle;
   display: inline-block; */
+}
+#show_post_div{
+  text-align: center;
+  font-family: 'Patrick Hand';
+}
 
+#add_comment_div{
+  padding-left: 35px;
+}
+#add_comment_btn{
+  vertical-align: top;
+}
+.post_top_div{
+  display: inline;
+  width: 100% !important;
+  font-family: 'Patrick Hand';
+}
+.post_left_div{
+  text-align: left!important;
+  padding-right: 10%;
+  width: 100%;
+}
+.post_right_div{
+  text-align: right!important;
+  width: 100%;
+}
+#caption_span{
+  font-family: 'Patrick Hand';
 }
 
 ul {
@@ -22,4 +55,10 @@ body{
 #logout_div{
   text-align:right;
   padding-right: 50px;
+}
+#comments_div{
+  text-align: left;
+  padding-left: 100px;
+  font-family: 'Patrick Hand';
+  font-size: 13px;
 }

@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :check_if_logged_in, only: [:create, :show]
   def create
     puts "%" * 80
     puts params
@@ -11,7 +12,18 @@ class PostsController < ApplicationController
     end
     post.save
 
-    render json: {status: 'success', post_id: post.id }, status: :ok
+    render json: {status: 'success', post: post }, include: {
+      user: {
+        only: [:name, :created_at, :image]
+      },
+      comments: {
+        include: {
+          user: {
+            only: [:name, :created_at, :image]
+          }
+        }
+      }
+    }
   end
 
   def update
@@ -24,6 +36,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    post = Post.find params[:id]
+    render json: post
   end
 
   private

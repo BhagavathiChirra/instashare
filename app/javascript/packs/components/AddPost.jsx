@@ -40,6 +40,7 @@ class AddPost extends Component{
     .then( response => {
       console.log(response);
       if(response.data.status === "success"){
+        this.props.addedPost( response.data.post );
         this.props.history.push("/");
       }
     })
