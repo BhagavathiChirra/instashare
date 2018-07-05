@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  root :to => 'session#new'
 
   get '/current_user' => 'users#current_user'
 
