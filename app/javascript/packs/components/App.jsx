@@ -21,14 +21,12 @@ class App extends Component{
       user: null
     }
 
-
     this.postAdded = this.postAdded.bind( this );
   }
 
   componentWillMount(){
     axios.get('/current_user')
     .then( res => {
-      // console.log('RES', res.data)
       this.setState({user: res.data})
     });
   }
@@ -58,8 +56,10 @@ class App extends Component{
             <Route exact path="/posts/new" render={ (props) => <AddPost {...props} addedPost={this.postAdded} /> }/>
             <Route exact path="/posts/:id" component={ShowPost} />
           </Switch>
+
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:username" component={Profile} />
+
           {/*<Route exact path="/posts/:id/edit" component={EditPost} />*/}
         </div>
       </Router>

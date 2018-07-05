@@ -44,11 +44,28 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    render json: @users, only: [:name, :image]
+    users = User.all
+    render json: users, only: [:name, :image]
   end
 
   def show
+    user = User.find_by(name: params[:username])
+    render json: user, only: [:name, :image, :email], include: {
+      posts: {
+        include: {
+          user: {
+            only: [:name, :created_at, :image]
+          },
+          comments: {
+            include: {
+              user: {
+                only: [:name, :created_at, :image]
+              }
+            }
+          }
+        }
+      }
+    }
   end
 
   def edit
