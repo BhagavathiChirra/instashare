@@ -9,7 +9,9 @@ You can sign up
 
 ## Login or Sign up for this site here.
 
-<!-- Start your travel journey right here: [Travel Mate ](https://project2-travelmate.herokuapp.com/welcome.html) -->
+Start sharing your images here: [INSTASHARE ](https://instasharebagi.herokuapp.com/)
+
+Login: Email: bagi@ga.com, password: chicken
 
 ## Ruby version:
 
@@ -50,9 +52,7 @@ Demo data can be populated in to the site using:
 $ rails db:seed
 ```
 
-## Services (job queues, cache servers, search engines, etc.)
-
-This service connects to a number of external searches:
+## Services
 
   - Cloudinary
 
@@ -82,13 +82,9 @@ $ heroku run rails db:seed -->
 
 ## Unsolved problems:
 
-<!-- - CSS is really cool, but it could be a tad annoying to deal with. -->
-
+- Not responsive
 
 ## Wish list:
 
-<!-- - Had the time been a bit longer, we would have loved to use React.js for our front end.
-- More features that are interesting to include are: Let user follow their favourite users, a newsfeed that updates all cool new blog posts in real time. -->
-
-
-## Acknowledgement:
+- Improving CSS styles
+- Showing number of followers and followings
