@@ -7,12 +7,24 @@ class Following extends Component{
   constructor(){
     super();
     this.state = {
-      posts: ''
+      posts: []
     }
+  }
+  componentWillMount(){
+    axios.get("/following_posts")
+    .then( response => {
+      if(response.data){
+        this.setState({posts: response.data})
+      }
+    })
+    .catch( err => console.warn('error loading user', err));
   }
   render(){
     return(
-      <h1>Following</h1>
+      <div>
+        <Posts posts={this.state.posts} />
+      </div>
     );
   }
 }
+export default Following;

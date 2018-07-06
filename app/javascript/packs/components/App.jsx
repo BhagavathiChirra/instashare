@@ -49,19 +49,17 @@ class App extends Component{
             <Link to="/">Home</Link> &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="/posts/new">New Post</Link> &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="/users">Users</Link> &nbsp;&nbsp;&nbsp;&nbsp;
-
+            <Link to="/following">Following</Link>
           </Navbar>
         </div>
-          {/* <Route exact path="/" component={ Home } /> */}
           <Route exact path="/" render={ (props) => <Home {...props} posts={posts} /> }/>
           <Switch>
             <Route exact path="/posts/new" render={ (props) => <AddPost {...props} addedPost={this.postAdded} /> }/>
             <Route exact path="/posts/:id" component={ShowPost} />
           </Switch>
-
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:username"  render={ (props) => <Profile {...props} current_user={this.state.user} />} />
-          {/*<Route exact path="/posts/:id/edit" component={EditPost} />*/}
+          <Route exact path="/following" component={Following} />
         </div>
       </Router>
     );
