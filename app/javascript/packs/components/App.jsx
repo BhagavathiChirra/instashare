@@ -8,6 +8,7 @@ import AddPost from './AddPost';
 import ShowPost from './ShowPost';
 import Profile from './Profile';
 import Users from './Users';
+import Following from './Following';
 
 
 import { Navbar } from 'reactstrap';
@@ -47,7 +48,8 @@ class App extends Component{
           <Navbar color="light" light expand="md">
             <Link to="/">Home</Link> &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="/posts/new">New Post</Link> &nbsp;&nbsp;&nbsp;&nbsp;
-            <Link to="/users">Users</Link>
+            <Link to="/users">Users</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+
           </Navbar>
         </div>
           {/* <Route exact path="/" component={ Home } /> */}
@@ -58,8 +60,7 @@ class App extends Component{
           </Switch>
 
           <Route exact path="/users" component={Users} />
-          <Route exact path="/users/:username" component={Profile} />
-
+          <Route exact path="/users/:username"  render={ (props) => <Profile {...props} current_user={this.state.user} />} />
           {/*<Route exact path="/posts/:id/edit" component={EditPost} />*/}
         </div>
       </Router>

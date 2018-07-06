@@ -29,8 +29,8 @@ class UsersController < ApplicationController
 
   def create
     user = User.new user_params
-    if params[:image].present?
-      req = Cloudinary::Uploader.upload(params[:image])
+    if params[:file].present?
+      req = Cloudinary::Uploader.upload(params[:file])
       user.image = req["public_id"]
     end
     user.save
@@ -49,23 +49,33 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(name: params[:username])
-    render json: user, only: [:name, :image, :email], include: {
-      posts: {
-        include: {
-          user: {
-            only: [:name, :created_at, :image]
-          },
-          comments: {
-            include: {
-              user: {
-                only: [:name, :created_at, :image]
+    # we are using resources for this route, but want to use the username to search
+    username = params[:id]
+
+    user = User.find_by(name: username)
+    render json: user, only: [:name, :image, :email],
+      # get an array of all the ids of the .followers association
+      methods: :follower_ids,
+      include: {
+
+        # followers: {
+        #   only: [:id, :name]
+        # },
+        posts: {
+          include: {
+            user: {
+              only: [:name, :created_at, :image]
+            },
+            comments: {
+              include: {
+                user: {
+                  only: [:name, :created_at, :image]
+                }
               }
             }
           }
         }
       }
-    }
   end
 
   def edit
@@ -75,6 +85,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def follow
+
+    to_follow = User.find_by(name: params[:name])
+
+    if @current_user.following.include? ( to_follow )
+      @current_user.following.destroy( to_follow )
+      render json: { status: 'unfollow' }
+    else
+      @current_user.following << to_follow
+      render json: {status: 'follow'}
+    end
+
   end
 
   private

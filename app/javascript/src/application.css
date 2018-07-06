@@ -8,11 +8,6 @@
 #post_home_image{
   cursor: pointer;
 }
-#post_col{
-  /* display: block; */
-  /* vertical-align: middle;
-  display: inline-block; */
-}
 #show_post_div{
   text-align: center;
   font-family: 'Patrick Hand';
@@ -65,9 +60,6 @@ body{
 .profile_user_image{
   border-radius: 50%;
 }
-/* #profile_div{
-  text-align: center;
-} */
 #profile_top_div{
   display: inline-block;
   padding-left: 250px;
@@ -75,4 +67,8 @@ body{
 .span_profile_name{
   padding-left: 30px;
   padding-right: 40px;
+}
+.comment_user_image{
+  border-radius: 50%;
+  padding-right: 5px;
 }

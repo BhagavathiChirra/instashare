@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import {Image} from 'cloudinary-react';
+import {Image, Transformation} from 'cloudinary-react';
 
 
 class Users extends Component{
@@ -21,7 +21,6 @@ class Users extends Component{
   }
 
   _handleClick(event, username){
-    // console.log('event', `/users/${username}`);
     this.props.history.push(`/users/${username}`);
   }
 
@@ -34,7 +33,9 @@ class Users extends Component{
               user =>
                 <li key={user.name}>
                   <Link to={`/users/${user.name}`}>
-                    <Image cloudName="dvlga6vu4" publicId={user.image} width="30" crop="scale" className="comment_user_image"/>&nbsp;&nbsp;
+                    <Image cloudName="dvlga6vu4" publicId={user.image} width="30" className="comment_user_image">
+                      <Transformation width="30" height="30" radius="max" crop="fill" />
+                    </Image>&nbsp;&nbsp;
                     {user.name}
                   </Link>
                 </li>

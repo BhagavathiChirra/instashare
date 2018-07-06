@@ -26,6 +26,22 @@ class PostsController < ApplicationController
     }
   end
 
+  def get_following_posts
+    posts = Post.where user_id: @current_user.following_ids
+    render json: posts, include: {
+      user: {
+        only: [:name, :created_at, :image]
+      },
+      comments: {
+        include: {
+          user: {
+            only: [:name, :created_at, :image]
+          }
+        }
+      }
+    }
+  end
+
   def update
   end
 

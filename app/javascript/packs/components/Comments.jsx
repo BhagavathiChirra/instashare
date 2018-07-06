@@ -77,9 +77,9 @@ class Comments extends Component{
         this.state.comments.map(
           (comment, index) =>
           <li key={comment.id} className="label label-default">
-            <Image cloudName="dvlga6vu4" publicId={comment.user.image} width="30" crop="scale" className="comment_user_image"/>
-            {comment.content}
-          <a href="#" className="delete_comment" id={comment.id} comment={comment} onClick={(event) => this._handleClickDelete(event, comment)}>Delete</a>
+            <Image cloudName="dvlga6vu4" publicId={comment.user.image} width="25" crop="scale" className="comment_user_image"/>
+            {comment.content}&nbsp;&nbsp;&nbsp;
+          <a href="#" className="delete_comment" id={comment.id} comment={comment} onClick={(event) => this._handleClickDelete(event, comment)}>Delete?</a>
           </li>
         )
       }
